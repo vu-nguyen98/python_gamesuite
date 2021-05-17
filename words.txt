@@ -18,6 +18,7 @@ among
 amount
 amusement
 and
+android
 angle
 angry
 animal
@@ -311,6 +312,7 @@ great
 green
 grey
 grip
+grotesque
 group
 growth
 guide
@@ -849,6 +851,3 @@ yes
 yesterday
 you
 young
-Bernhard
-Breytenbach
-Android

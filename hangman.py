@@ -1,6 +1,28 @@
 # Importing some libraries that we will be using for this specific game
-import random
 import itertools
+import random
+
+
+def word_populate():
+    # Open the words.txt file included in the folder
+    # The words.txt file has a list of words that can be used in hangman
+    hangman_file = (open("words.txt", "r")).read()
+
+    # Since each word is in a line, split them by using newline (\n)
+    # Now the hangman_file variable becomes a list
+    hangman_file = hangman_file.split('\n')
+
+    # Return a randomly chosen word in hangman_file for the game
+    return random.choice(hangman_file)
+
+
+def word_split(word):
+    return [char for char in word]
+
+
+def print_player_guess_progress(guess_list):
+    for x in guess_list:
+        print(x, end=" ")
 
 
 def hangman_main():
@@ -26,7 +48,7 @@ def hangman_main():
     guess_memory = []
 
     # Repeat this as long as the player still has not guessed the correct answer
-    while not (player_guessed):
+    while not player_guessed:
         if player_life == 0:
             break
         # Print the player's progress
@@ -48,7 +70,6 @@ def hangman_main():
 
         # If input is valid, append the letter into a "memory" list to prevent dupes
         guess_memory.append(player_guess)
-
 
         # Now, determine if the guessed letter matches anything in the word
         # Use i as an index to determine position in the list
@@ -79,25 +100,3 @@ def hangman_main():
     else:
         print("You did it, you have guessed the word!")
     print("The word was {0}".format(chosen_word_full))
-
-
-def word_populate():
-    # Open the words.txt file included in the folder
-    # The words.txt file has a list of words that can be used in hangman
-    hangman_file = (open("words.txt", "r")).read()
-
-    # Since each word is in a line, split them by using newline (\n)
-    # Now the hangman_file variable becomes a list
-    hangman_file = hangman_file.split('\n')
-
-    # Return a randomly chosen word in hangmanfile for the game
-    return random.choice(hangman_file)
-
-
-def word_split(word):
-    return [char for char in word]
-
-
-def print_player_guess_progress(guess_list):
-    for x in guess_list:
-        print(x, end=" ")
