@@ -1,3 +1,4 @@
+abjure
 able
 about
 account
@@ -25,6 +26,7 @@ animal
 answer
 ant
 any
+apologia
 apparatus
 apple
 approval
@@ -78,6 +80,7 @@ blue
 board
 boat
 body
+bogart
 boiling
 bone
 book
@@ -98,6 +101,7 @@ broken
 brother
 brown
 brush
+brusque
 bucket
 building
 bulb
@@ -130,6 +134,7 @@ chief
 chin
 church
 circle
+clandestine
 clean
 clear
 clock
@@ -154,6 +159,7 @@ condition
 connection
 conscious
 control
+convalesce
 cook
 copper
 copy
@@ -307,6 +313,7 @@ gold
 good
 government
 grain
+grandiloquence
 grass
 great
 green
@@ -338,6 +345,7 @@ heat
 help
 high
 history
+hobbit
 hole
 hollow
 hook
@@ -352,6 +360,7 @@ humour
 I
 ice
 idea
+idiopathic
 if
 ill
 important
@@ -368,6 +377,7 @@ invention
 iron
 island
 jelly
+jeopardy
 jewel
 join
 journey
@@ -485,6 +495,7 @@ now
 number
 nut
 observation
+obstreperous
 of
 off
 offer
@@ -547,6 +558,7 @@ pot
 potato
 powder
 power
+prerogative
 present
 price
 print
@@ -658,7 +670,6 @@ simple
 sister
 size
 skin
-
 skirt
 sky
 sleep
@@ -681,7 +692,6 @@ sock
 soft
 solid
 some
-
 son
 song
 sort
@@ -692,6 +702,7 @@ space
 spade
 special
 sponge
+spontaneous
 spoon
 spring
 square
@@ -793,12 +804,14 @@ unit
 up
 use
 value
+vendetta
 verse
 very
 vessel
 view
 violent
 voice
+voracious
 waiting
 walk
 wall

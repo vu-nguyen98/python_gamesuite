@@ -3,10 +3,19 @@ import itertools
 import random
 
 
-def word_populate():
-    # Open the words.txt file included in the folder
+def word_populate(diff):
+    # Open the different .txt file included in the folder
     # The words.txt file has a list of words that can be used in hangman
-    hangman_file = (open("words.txt", "r")).read()
+    # Through processing of words.txt, words_easy.txt, words_medium.txt and words_hard.txt are created
+    # These will allow for difficulty selection
+
+    # If argument passed in is 1 -> easy, 2 -> medium and 3 -> hard
+    if int(diff) == 1:
+        hangman_file = (open("words_easy.txt", "r")).read()
+    elif int(diff) == 2:
+        hangman_file = (open("words_medium.txt", "r")).read()
+    else:
+        hangman_file = (open("words_hard.txt", "r")).read()
 
     # Since each word is in a line, split them by using newline (\n)
     # Now the hangman_file variable becomes a list
@@ -27,13 +36,29 @@ def print_player_guess_progress(guess_list):
 
 def hangman_main():
     # Just introduction to the game
-    print("Welcome to the game of hangman!")
-    print("We will choose a random word for you. Please guess!")
-    print("You will have six tries to guess the word.")
+    print("\nWelcome to the game of hangman!")
+    print("We will choose a random word for you. Please make guesses!")
+    print("You will have six tries to guess the word.\n")
+
+    # Allow for difficulty selection
+    print("But first, please select the difficulty that you want:")
+    print("1. Easy")
+    print("2. Medium")
+    print("3. Hard")
+
+    # Repeat this until the player selects a proper difficulty
+    while True:
+        diff_sel = input("Your choice: ")
+        if not diff_sel:
+            print("Please enter something!")
+        elif int(diff_sel) not in (1, 2, 3):
+            print("Please select a proper difficulty! 1 for easy, 2 for medium, 3 for hard!")
+        else:
+            break
 
     # Now, we fetch a word to be used for hangman
     # Uses a function called word_populate to pick a random word in long list
-    chosen_word_full = word_populate()
+    chosen_word_full = word_populate(diff_sel)
     # Then split the chosen word into letters
     chosen_word = word_split(chosen_word_full)
     # Then, create a "guessing" list for user based on length of chosen word
@@ -58,7 +83,10 @@ def hangman_main():
         # Repeat this chunk of code until the player enters a valid letter in the English alphabet
         while True:
             print("You have {0} tries remaining...".format(player_life))
-            player_guess = input("Please enter a letter: ")
+            print("Letters that you have already guessed:", end=" ")
+            for i in guess_memory:
+                print(i, end=" ")
+            player_guess = input("\nPlease enter a letter: ")
             if not player_guess.isalpha():
                 print("You must guess an alphabetical letter!\n")
             elif len(player_guess) > 1:

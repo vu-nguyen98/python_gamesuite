@@ -1,6 +1,6 @@
 # This file will process the words.txt that is used to populate hangman games
 # The aim of this code is to process the listed words and:
-# 1. Remove all words that are 3 letters or less.
+# 1. Remove all words that are 2 letters or less.
 # 2. Use an index to "rank" words based on difficulty of guessing
 # 3. Split those words into 3 different .txt files: easy, medium and hard
 # Difficulty based on the "A Better Hangman Strategy" found on https://datagenetics.com/blog/april12012/
@@ -14,6 +14,8 @@ from hangman import word_split
 # Essentially, each letter is weighted based on their probability of occurring in each word
 # The list is found in "A Better Hangman Strategy" and compiled into a .txt file
 # So, the most common letter (E) will be assigned 1, up to the least common letter (J), which is assigned 26
+# But then, I want to give a lot more weight to words down the line
+# So I created an exponential equation along the lines of y = x^1.8 to give more weight to later letters like J
 def populate_difficulty():
     difficulty_file = (open('hangman_word_probability.txt', 'r')).read()
     difficulty_file = difficulty_file.split('\n')
@@ -21,7 +23,7 @@ def populate_difficulty():
     # Initialize an empty dictionary to take in the difficulty number
     difficulty_dict = {}
     for z in range(len(difficulty_file)):
-        difficulty_dict[(difficulty_file[z]).lower()] = int(z + 1)
+        difficulty_dict[(difficulty_file[z]).lower()] = pow((z + 1), 1.8)
     return difficulty_dict
 
 
@@ -34,7 +36,7 @@ difficulty_dictionary = populate_difficulty()
 
 # First, remove all of the words that are 4 letters or less
 for x in hangman_file[:]:
-    if len(x) <= 3:
+    if len(x) <= 2:
         hangman_file.remove(x)
 
 # Initialize the dictionary index
@@ -48,7 +50,10 @@ for i in range(len(hangman_file)):
             if j == m:
                 difficulty_points += k
     # Get the average difficulty of each of the word
-    difficulty_points //= len(hangman_file[i])
+    # Then re-multiply with an exponential scaling along the lines of y = x^0.85
+    # Since longer words does not necessarily mean more difficult
+    # Gives a bit less weight to absurdly long words
+    difficulty_points = difficulty_points // len(hangman_file[i]) * pow(len(hangman_file[i]), 0.85)
     # Add the difficulty and the word to the difficulty dictionary
     difficulty_index_dictionary[hangman_file[i]] = difficulty_points
 

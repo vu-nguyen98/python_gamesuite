@@ -14,7 +14,9 @@ for x in options:
 # Repeat this input loop until a valid selection is there
 while True:
     sel = input("Please make your selection: ")
-    if int(sel) not in options:
+    if not sel:
+        print("Please enter something!")
+    elif int(sel) not in options:
         print("There is no such option!")
     else:
         break
