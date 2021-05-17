@@ -20,13 +20,16 @@ def hangman_main():
         player_guess_progress.append('_')
 
     # Now we begin the main game loop
-    # Instantiate the player have guessed and player life remaining
+    # Instantiate the player have guessed, player life remaining, and "memory" list of words guessed
     player_guessed = False
     player_life = 6
-    print(chosen_word)
+    guess_memory = []
 
     # Repeat this as long as the player still has not guessed the correct answer
     while not (player_guessed):
+        if player_life == 0:
+            break
+        # Print the player's progress
         print_player_guess_progress(player_guess_progress)
         print("\n")
 
@@ -35,32 +38,47 @@ def hangman_main():
             print("You have {0} tries remaining...".format(player_life))
             player_guess = input("Please enter a letter: ")
             if not player_guess.isalpha():
-                print("You must guess an alphabetical letter!")
+                print("You must guess an alphabetical letter!\n")
             elif len(player_guess) > 1:
-                print("Your guess is too long! Guess only one letter!")
+                print("Your guess is too long! Guess only one letter!\n")
+            elif player_guess in guess_memory:
+                print("You already guessed this one! Try another guess!\n")
             else:
                 break
 
+        # If input is valid, append the letter into a "memory" list to prevent dupes
+        guess_memory.append(player_guess)
+
+
         # Now, determine if the guessed letter matches anything in the word
         # Use i as an index to determine position in the list
+        # Also use correct_guess to flag if the player guessed at least one letter correctly
         i = 0
+        correct_guess = False
         # Use for to run through the chosen word letter by letter
         for x in chosen_word:
             # If the guess is correct then change the letter at the position determined by i
             # This will allow for the printing of the player's progress
             if player_guess.lower() == x:
                 player_guess_progress[int(i)] = x
-                break
+                correct_guess = True
             i += 1
-        else:
+
+        if not correct_guess:
+            print("No match! You lost a life!")
             player_life -= 1
-            print("No match found! You lost a life!")
 
         # Run this every loop to determine if the player has guessed correctly
         if "_" not in player_guess_progress:
             player_guessed = True
 
-    print("you did it mate.")
+    # When the loop breaks, check if the user has already guessed the word correctly
+    # THen print corresponding comments
+    if not player_guessed:
+        print("Unfortunately, you have failed to guess the word in time!")
+    else:
+        print("You did it, you have guessed the word!")
+    print("The word was {0}".format(chosen_word_full))
 
 
 def word_populate():
@@ -80,6 +98,6 @@ def word_split(word):
     return [char for char in word]
 
 
-def print_player_guess_progress(list):
-    for x in list:
+def print_player_guess_progress(guess_list):
+    for x in guess_list:
         print(x, end=" ")
