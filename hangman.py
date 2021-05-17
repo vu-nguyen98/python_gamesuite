@@ -1,6 +1,9 @@
 # Importing some libraries that we will be using for this specific game
 import itertools
 import random
+import time
+
+from util import *
 
 
 def word_populate(diff):
@@ -36,7 +39,8 @@ def print_player_guess_progress(guess_list):
 
 def hangman_main():
     # Just introduction to the game
-    print("\nWelcome to the game of hangman!")
+    clear()
+    print("Welcome to the game of hangman!")
     print("We will choose a random word for you. Please make guesses!")
     print("You will have six tries to guess the word.\n")
 
@@ -77,8 +81,13 @@ def hangman_main():
         if player_life == 0:
             break
         # Print the player's progress
+        clear()
         print_player_guess_progress(player_guess_progress)
         print("\n")
+        # Run this every loop to determine if the player has guessed correctly
+        if "_" not in player_guess_progress:
+            player_guessed = True
+            break
 
         # Repeat this chunk of code until the player enters a valid letter in the English alphabet
         while True:
@@ -115,14 +124,11 @@ def hangman_main():
 
         if not correct_guess:
             print("No match! You lost a life!")
+            time.sleep(1)
             player_life -= 1
 
-        # Run this every loop to determine if the player has guessed correctly
-        if "_" not in player_guess_progress:
-            player_guessed = True
-
     # When the loop breaks, check if the user has already guessed the word correctly
-    # THen print corresponding comments
+    # Then print corresponding comments
     if not player_guessed:
         print("Unfortunately, you have failed to guess the word in time!")
     else:
