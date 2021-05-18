@@ -15,7 +15,7 @@ from hangman import word_split
 # The list is found in "A Better Hangman Strategy" and compiled into a .txt file
 # So, the most common letter (E) will be assigned 1, up to the least common letter (J), which is assigned 26
 # But then, I want to give a lot more weight to words down the line
-# So I created an exponential equation along the lines of y = x^1.8 to give more weight to later letters like J
+# So I created an exponential equation along the lines of y = x^2 to give more weight to later letters like J
 def populate_difficulty():
     difficulty_file = (open('hangman_word_probability.txt', 'r')).read()
     difficulty_file = difficulty_file.split('\n')
