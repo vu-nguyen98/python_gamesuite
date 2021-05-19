@@ -1,6 +1,7 @@
 # Get all functions from util.py
 # Get all functions from each of the individual games in the suit in other .py files
 from hangman import *
+from tictactoe import *
 from util import *
 
 # Get some stuff going first, like making the option dictionary
@@ -26,3 +27,6 @@ while True:
 
     if int(sel) == 1:
         hangman_main()
+
+    if int(sel) == 2:
+        tictactoe_main()
